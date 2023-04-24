@@ -495,6 +495,13 @@
 		clock-names = "dphy", "esc", "pixel";
 		status = "disabled";
 	};
+
+	mailbox_a: mailbox@50110000 {
+		compatible = "nxp,imx-mu-rev2";
+		reg = <0x50110000 0x1000>;
+		interrupts = <34 0>;
+		rdc = <0>;
+	};
 };
 
 &flexspi {

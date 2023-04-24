@@ -1,0 +1,19 @@
+# NXP i.MX8 SoC family configuration options
+#
+# Copyright (c) 2023 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_NXP_FUSION_DSP
+	bool
+	select ARCH_HAS_COHERENCE
+
+if SOC_FAMILY_NXP_FUSION_DSP
+
+config SOC_FAMILY
+	string
+	default "nxp_fusion_dsp"
+
+# Select SoC Part No. and configuration options
+source "soc/xtensa/nxp_fusion_dsp/*/Kconfig.soc"
+
+endif # SOC_FAMILY_NXP_ADSP

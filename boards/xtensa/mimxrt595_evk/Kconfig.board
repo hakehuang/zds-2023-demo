@@ -1,0 +1,8 @@
+# XTENSA board configuration
+
+# Copyright (c) 2022 NXP Semiconductor
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_RT595_XTENSA
+	bool "Xtensa emulation using QEMU"
+	select QEMU_TARGET

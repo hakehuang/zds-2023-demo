@@ -1,0 +1,11 @@
+# Copyright (c) 2021 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_SERIES_NXP_RT5XX_FUSION_DSP
+	bool "NXP i.MRT5XX FUSION DSP"
+	select SOC_FAMILY_NXP_FUSION_DSP
+	select XTENSA
+	select XTENSA_HAL
+	select ARCH_SUPPORTS_COREDUMP
+	help
+	  NXP i.MXRT5XX FUSION DSP

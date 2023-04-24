@@ -1,0 +1,18 @@
+# Copyright (c) 2023 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NXP_RT5XX_FUSION_DSP
+
+config SOC_SERIES
+	string
+	default "rt5xx"
+
+config SOC_TOOLCHAIN_NAME
+	string
+	default "sample_controller"
+
+config SOC
+	string
+	default "sample_controller"
+
+endif # SOC_SERIES_NXP_RT5XX_FUSION_DSP

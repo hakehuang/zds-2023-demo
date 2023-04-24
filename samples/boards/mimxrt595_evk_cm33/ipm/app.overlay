@@ -1,0 +1,10 @@
+/*
+ * Copyright 2022, NXP
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+&mailbox_a {
+        label = "mail_box";
+	status = "okay";
+};

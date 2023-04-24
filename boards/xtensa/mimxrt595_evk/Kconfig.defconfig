@@ -1,0 +1,17 @@
+# MIMXRT685-EVK board
+
+# Copyright (c) 2023, NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_RT595_XTENSA
+
+config BUILD_OUTPUT_BIN
+	default n
+
+config BOARD
+	default "mimxrt595_evk_xtensa"
+
+config IPM_CONSOLE_STACK_SIZE
+	default 2048 if IPM_CONSOLE_RECEIVER
+
+endif # BOARD_RT595_XTENSA

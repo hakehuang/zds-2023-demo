@@ -13,10 +13,14 @@
 #include <zephyr/irq.h>
 #if defined(CONFIG_IPM_IMX_REV2)
 #define DT_DRV_COMPAT nxp_imx_mu_rev2
+#if defined(CONFIG_SOC_FAMILY_NXP_FUSION_DSP)
+#include "mu.h"
+#else
 #include "fsl_mu.h"
+#endif
 #else
 #define DT_DRV_COMPAT nxp_imx_mu
-#include <mu_imx.h>
+#include <fsl_mu_imx.h>
 #endif
 
 #define MU(config) ((MU_Type *)config->base)

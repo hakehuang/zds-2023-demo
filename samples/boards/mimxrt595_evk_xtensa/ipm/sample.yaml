@@ -1,0 +1,12 @@
+#
+# Copyright 2022, NXP
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+sample:
+  name: IMP for mimxrt595_evk
+common:
+  tags: imp
+tests:
+  sample.boards.mimxrt595_evk_dsp.imp:
+    platform_allow: mimxrt595_evk_dsp

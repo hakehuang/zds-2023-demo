@@ -1,0 +1,7 @@
+# Copyright 2022, NXP
+#
+# SPDX-License-Identifier: Apache-2.0
+
+mainmenu "MIMXRT595_EVK_DSP IMP demo"
+
+source "Kconfig.zephyr"

@@ -6,3 +6,8 @@ description: Cadence Tensilica Xtensa LX4 CPU
 compatible: "cdns,tensilica-xtensa-lx4"
 
 include: cpu.yaml
+
+properties:
+  clock-source:
+    type: int
+    description: cpu clock source
