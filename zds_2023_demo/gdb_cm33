@@ -1,0 +1,97 @@
+# GDBINIT TEMPLATE WITH SOURCE CODE DIRECTORY
+
+# Set source code directory
+#b z_arm_prep_c
+#b POWER_EnterFbb
+#b POWER_SetLdoVoltageForFreq
+#b sys_clock_driver_init
+b imx_mu_isr
+
+#directory /home/shared/temp/board_EVK-MIMXRT595/devices/MIMXRT595S/drivers:/home/shared/temp/board_EVK-MIMXRT595/boards/evkmimxrt595/sdmmc_examples/sdcard_polling:/home/shared/temp/board_EVK-MIMXRT595/devices/MIMXRT595S/iar
+target remote 127.0.0.1:1234
+maintenance packet Qqemu.PhyMemMode:1
+
+# Set some useful defaults
+set confirm off
+set verbose off
+set print pretty on
+set print elements 0
+set print repeats 0
+set history save on
+set history filename ~/.gdb_history
+
+# Enable pretty-printing for C++ STL containers and strings
+python
+import sys
+try:
+    from gdb.printing import PrettyPrinter
+    from libcpp.string import *
+    from libcpp.vector import *
+
+    class StlPrinter(PrettyPrinter):
+        def __init__(self):
+            super(StlPrinter, self).__init__('stl')
+            self.enabled = True
+
+        class _iterator(object):
+            def __init__(self, begin, end):
+                self.elem = begin
+                self.end = end
+
+            def __iter__(self):
+                return self
+
+            def __next__(self):
+                if self.elem == self.end:
+                    raise StopIteration
+                elem = self.elem.dereference()
+                self.elem += 1
+                return elem
+
+        def __call__(self, val):
+            typename = str(val.type)
+            if typename.startswith('basic_string'):
+                return self.print_string(val)
+            elif typename.startswith('vector'):
+                return self.print_vector(val)
+            elif typename.startswith('deque'):
+                return self.print_sequence(val, 'deque')
+            elif typename.startswith('list'):
+                return self.print_sequence(val, 'list')
+            elif typename.startswith('set'):
+                return self.print_sequence(val, 'set')
+            elif typename.startswith('multiset'):
+                return self.print_sequence(val, 'multiset')
+            elif typename.startswith('map'):
+                return self.print_map(val)
+            elif typename.startswith('multimap'):
+                return self.print_map(val, 'multimap')
+            else:
+                return None
+
+        def print_string(self, val):
+            return val['data'].string()
+
+        def print_vector(self, val):
+            begin = val['_M_impl']['_M_start']
+            end = val['_M_impl']['_M_finish']
+            return self._iterator(begin, end)
+
+        def print_sequence(self, val, type):
+            begin = val['_M_impl']['_M_start']
+            end = val['_M_impl']['_M_finish']
+            size = end - begin
+            return '{} of size {}'.format(type, size)
+
+        def print_map(self, val, type='map'):
+            begin = val['_M_t']['_M_impl']['_M_header']['_M_parent']
+            end = None
+            return self._iterator(begin, end)
+
+    gdb.printing.register_pretty_printer(gdb.current_objfile(), StlPrinter())
+
+except ImportError:
+    pass
+
+end
+

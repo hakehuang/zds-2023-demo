@@ -1,0 +1,21 @@
+# GDBINIT TEMPLATE WITH SOURCE CODE DIRECTORY
+
+# Set source code directory
+
+b main
+
+#directory /home/shared/temp/board_EVK-MIMXRT595/devices/MIMXRT595S/drivers:/home/shared/temp/board_EVK-MIMXRT595/boards/evkmimxrt595/sdmmc_examples/sdcard_polling:/home/shared/temp/board_EVK-MIMXRT595/devices/MIMXRT595S/iar
+target remote 127.0.0.1:1234
+maintenance packet Qqemu.PhyMemMode:1
+
+#run -nographic -machine xt-rt595-nommu  -semihosting  -cpu sample_controller -kernel ./zephyr_rt595_xtensa_ipm.elf
+
+# Set some useful defaults
+set confirm off
+set verbose off
+set print pretty on
+set print elements 0
+set print repeats 0
+set history save on
+set history filename ~/.gdb_history
+
