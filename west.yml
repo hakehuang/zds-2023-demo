@@ -7,7 +7,7 @@ manifest:
 
   remotes:
     - name: zephyrproject-rtos
-      url-base: https://github.com/hakehuang/zds-2023-demo/
+      url-base: https://github.com/nxp-zephyr/
 
   projects:
     - name: zephyr
